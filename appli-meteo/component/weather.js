@@ -44,11 +44,13 @@ useEffect(() => {
         return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
     }
     
-    return (
+    return weatherData?(
         <>
             <ImageBackground source={getBackgroundImage()} style={styles.background}>
                 <View style={styles.container}>
-                    <Text style={styles.temperature}>{weatherData.daily.temperature_2m_max[0]}°</Text>
+                    <Text style={styles.temperature}>
+                        {weatherData && weatherData.daily && weatherData.daily.temperature_2m_max ? `${weatherData.daily.temperature_2m_max[0]}°` : ''}
+                    </Text>
                     <Text style={styles.city}>Ville</Text>
                     <Text style={styles.time}>{getCurrentTime()}</Text>
                     <TextInput
@@ -59,7 +61,7 @@ useEffect(() => {
                 </View>
             </ImageBackground>
         </>
-    );
+    ):null;
 };
 
 const styles = StyleSheet.create({
