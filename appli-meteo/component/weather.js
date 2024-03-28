@@ -17,6 +17,7 @@ const WeatherApp = () => {
         <>
             <ImageBackground source={getBackgroundImage()} style={styles.background}>
                 <View style={styles.container}>
+                    <Text style={styles.temperature}>8°</Text>
                     <Text style={styles.city}>Ville</Text>
                     <Text style={styles.time}>{getCurrentTime()}</Text>
                     <TextInput
@@ -71,6 +72,14 @@ const styles = StyleSheet.create({
           top: 30,
           right: 20,
           fontSize: 20,
+          fontWeight: 'bold',
+          color: 'white',
+      },
+      temperature: {
+          position: 'absolute',
+          top: 110,
+          left: 30,
+          fontSize: 150,
           fontWeight: 'bold',
           color: 'white',
       }
