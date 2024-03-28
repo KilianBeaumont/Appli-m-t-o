@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ImageBackground, TextInput, Text } from 'react-native';
+import { View, StyleSheet, ImageBackground, TextInput, Text, Image } from 'react-native';
 import * as Location from 'expo-location';
+import { getWeatherInterpretation } from '../services/meteo-service';
 
 const WeatherApp = () => {
 
@@ -48,6 +49,11 @@ useEffect(() => {
         <>
             <ImageBackground source={getBackgroundImage()} style={styles.background}>
                 <View style={styles.container}>
+                {weatherData.current_weather.weathercode && (
+                    <Image
+                        source={getWeatherInterpretation(weatherData.current_weather.weathercode).image}
+                        style={styles.weatherIcon}
+                    />)}
                     <Text style={styles.temperature}>
                         {weatherData && weatherData.daily && weatherData.daily.temperature_2m_max ? `${weatherData.daily.temperature_2m_max[0]}°` : ''}
                     </Text>
@@ -115,7 +121,14 @@ const styles = StyleSheet.create({
           fontSize: 100,
           fontWeight: 'bold',
           color: 'white',
-      }
+      },
+      weatherIcon: {
+        width: 100,
+        height: 100,
+        position: 'absolute',
+        top: 160,
+        right: 20,
+    },
 });
 
 export default WeatherApp;
